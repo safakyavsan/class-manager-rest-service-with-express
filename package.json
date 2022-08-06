@@ -1,0 +1,40 @@
+{
+  "name": "class-manager-rest-service-with-express",
+  "version": "1.0.0",
+  "description": "Class Manager App's Rest Service written using ExpressJs",
+  "main": "index.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/safakyavsan/class-manager-rest-service-with-express.git"
+  },
+  "keywords": [
+    "expressJs",
+    "nodeJs",
+    "backendService",
+    "classManager",
+    "rest",
+    "api"
+  ],
+  "author": "safakyavsan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/safakyavsan/class-manager-rest-service-with-express/issues"
+  },
+  "homepage": "https://github.com/safakyavsan/class-manager-rest-service-with-express#readme",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^18.6.4",
+    "concurrently": "^7.3.0",
+    "nodemon": "^2.0.19",
+    "typescript": "^4.7.4"
+  }
+}
