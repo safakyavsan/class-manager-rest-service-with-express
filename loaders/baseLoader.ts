@@ -1,11 +1,9 @@
 "use strict";
 
-export class BaseLoader {
-  config: any;
-  constructor(config: any) {
-    this.config = config;
-  }
+import { apiConfig } from "../configs/apiServerConfig";
+import { mongoDbConfig } from "../configs/mongoDbConfig";
 
+export class BaseLoader {
   async start() {
     throw new Error("Cannot call abstract method");
   }
