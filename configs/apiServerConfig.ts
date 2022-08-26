@@ -1,5 +1,9 @@
 import { Service } from "typedi";
 
-export const apiConfig = {
-  port: process.env.API_SERVER_PORT ? process.env.API_SERVER_PORT : "8080",
-};
+@Service()
+export class apiConfig {
+  port: string;
+  constructor() {
+    this.port = process.env.API_SERVER_PORT ?? "8080";
+  }
+}

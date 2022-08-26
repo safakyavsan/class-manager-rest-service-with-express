@@ -1,28 +1,33 @@
 import { BaseLoader } from "./baseLoader";
-import express, { Express } from "express";
+import express, { Express, Router } from "express";
 import { Server } from "http";
 import cors from "cors";
 import bodyParser from "body-parser";
-import { Service } from "typedi";
+import { Inject, Service } from "typedi";
 import { apiConfig } from "../configs/apiServerConfig";
+import { IndexRoute } from "../routes";
 @Service()
 export class ExpressLoader extends BaseLoader {
-  express: Express;
-  server: Server | null;
-  config: typeof apiConfig;
-  constructor(config: typeof apiConfig) {
-    this.config = config;
-    this.express = express();
-    this.express.use(cors());
-    this.express.use(bodyParser.json());
-    this.server = null;
+  _express: Express;
+  _server: Server | null;
+  _config: apiConfig;
+  _router: Router;
+  constructor(@Inject() config: apiConfig, @Inject() router: IndexRoute) {
+    super();
+    this._config = config;
+    this._express = express();
+    this._router = router.router;
+    this._express.use(cors());
+    this._express.use(bodyParser.json());
+    this._express.use(this._router);
+    this._server = null;
   }
 
   async start() {
-    this.server = this.express
-      .listen(this.config.port, () => {
+    this._server = this._express
+      .listen(this._config.port, () => {
         console.log(
-          `⚡️[server]: Server is running at https://localhost:${this.config.port}`
+          `⚡️[server]: Server is running at https://localhost:${this._config.port}`
         );
       })
       .on("error", (err: any) => {
@@ -30,6 +35,6 @@ export class ExpressLoader extends BaseLoader {
       });
   }
   async stop() {
-    this.server?.close();
+    this._server?.close();
   }
 }

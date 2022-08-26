@@ -1,16 +1,21 @@
 import { Inject, Service } from "typedi";
 import { ExpressLoader } from "./express";
-import { config as Configs } from "../configs";
+import RouterLoader from "./router";
+
 @Service()
-class Loader {
+export class Loader {
   constructor(
     @Inject()
     private express: ExpressLoader,
     @Inject()
-    private configs: typeof Configs
-  ) {}
+    private router: RouterLoader
+  ) {
+    this.express = express;
+    this.router = router;
+  }
 
   async start() {
+    await this.router.start();
     await this.express.start();
   }
   async stop() {

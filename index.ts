@@ -1,15 +1,7 @@
-import express, { Express, Request, Response, Router } from "express";
-import dotenv from "dotenv";
+import "reflect-metadata";
+import { Container } from "typedi";
+import { Loader } from "./loaders";
 
-dotenv.config();
+const Loaders = Container.get<Loader>(Loader);
 
-const app: Express = express();
-const router: Router = express.Router();
-const port: string | undefined = process.env.API_SERVER_PORT;
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
-});
-app.use(router);
-router.get("/", (_req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
-});
+Loaders.start();
