@@ -2,6 +2,8 @@ import { Service } from "typedi";
 import { Request, Response } from "express";
 @Service()
 export default class IndexController {
+  userModel: any;
+  constructor() {}
   public index(_req: Request, res: Response) {
     res.send("Hello World!");
   }
